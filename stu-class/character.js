@@ -1,6 +1,15 @@
 class Character {
 
     constructor (name, strength, hitpoints) {
+        if (!name) {
+            throw new Error("You are missing a name");
+        }
+        if (!strength) {
+            throw new Error("You are missing the strength");
+        }
+        if (!hitpoints) {
+            throw new Error("You are missing hitpoints");
+        }
         this.name = name;
         this.strength = strength;
         this.hitpoints = hitpoints;
@@ -18,6 +27,7 @@ class Character {
         if (this.hitpoints > 0) {
             return true;
         } else {
+            console.log(`${this.name} has been defeated!`);
             return false;
         }
     };
@@ -30,7 +40,7 @@ class Character {
 
       opponent.hitpoints -= this.strength;
 
-      console.log(`${this.name} attacked ${opponent.name}`);
+      console.log(`${this.name} attacked ${opponent.name} for ${this.strength}. Shit's about to get real.`);
     }
   }
   
@@ -41,7 +51,18 @@ class Character {
 
   accountant.printStats();
   greedyKing.printStats();
+
+  const turnInterval = setInterval(() => {
+
+    accountantTurn = !accountantTurn;
+
+    if (!accountant.isAlive() || !greedyKing.isAlive()) {
+        clearInterval(turnInterval);
+        console.log("Game over Man!");
+    } else if (accountantTurn) {
+        accountant.attack(greedyKing);
+        greedyKing.printStats();
+    }
+  }, 2000);
   
   // Create an interval that alternates attacks every 2000 milliseconds
-
-  setInterval(attack(opponent), 2000);
