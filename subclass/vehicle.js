@@ -45,5 +45,5 @@ class Boat extends Vehicle {
     }
 }
 
-  module.exports = Vehicle;
+  module.exports = Vehicle, Car, Boat;
   
