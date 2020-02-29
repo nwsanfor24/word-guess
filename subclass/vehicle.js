@@ -12,9 +12,14 @@ class Vehicle {
   }
 
 class Car extends Vehicle {
-    constructor(color, passengers) {
+    constructor(id, color, passengers) {
+        super(id, 4, "honk");
         this.color = color;
         this.passengers = passengers;
+    }
+
+    useHorn() {
+        console.log(this.sound);
     }
 
     checkPassengers() {
@@ -24,20 +29,38 @@ class Car extends Vehicle {
             console.log("There are too many passengers! GET THEM OUT!!");
             return false;
         }
-    }
-
-    useHorn() {
-        console.log(this.sound);
-    }
+    }    
 }
 
+const carPassengers = [
+    {
+        name: "Nathan"
+    },
+    {
+        name: "Harrison"
+    },
+    {
+        name: "Mitchell"
+    },
+    {
+        name: "Rebecca"
+    },
+    {
+        name: "Jillian"
+    },
+];
+
 class Boat extends Vehicle {
-    constructor(crew) {
+    constructor(id, type, crew) {
+        super(id, 0, "bwom");
+        this.type = type;
         this.crew = crew;
     }
 
     crewSoundOff() {
-        console.log(`${this.crew}`);
+        this.crew.forEach(member => {
+
+        })
     }
 
     useHorn() {
@@ -45,5 +68,11 @@ class Boat extends Vehicle {
     }
 }
 
-  module.exports = Vehicle, Car, Boat;
+const car = new Car(15, "blue", carPassengers);
+
+car.printInfo();
+car.useHorn();
+car.checkPassengers();
+
+  module.exports = Vehicle;
   
